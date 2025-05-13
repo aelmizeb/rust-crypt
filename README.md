@@ -1,38 +1,30 @@
-# eframe template
+# 🔐 Rust Crypt: A Customizable Encryptor Built with Rust
 
-[![dependency status](https://deps.rs/repo/github/emilk/eframe_template/status.svg)](https://deps.rs/repo/github/emilk/eframe_template)
-[![Build Status](https://github.com/emilk/eframe_template/workflows/CI/badge.svg)](https://github.com/emilk/eframe_template/actions?workflow=CI)
+![WIP](https://img.shields.io/badge/status-WIP-orange?style=flat-square)
 
-This is a template repo for [eframe](https://github.com/emilk/egui/tree/master/crates/eframe), a framework for writing apps using [egui](https://github.com/emilk/egui/).
+> ⚠️ **WORK IN PROGRESS**  
+> This app is currently under active development. It is not ready for use. Please do not install it.
 
-The goal is for this to be the simplest way to get started writing a GUI app in Rust.
+A customizable encryption system built with Rust that allows users to encrypt and decrypt text or files using their own configurable encryption logic. Designed to be educational, flexible, and easy to use.
 
-You can compile your app natively or for the web, and share it using Github Pages.
+## 🧠 Features
 
-## Getting started
+- ⚙️ Customizable encryption logic (XOR, Caesar, Substitution — or your own).
+- 📁 Encrypt plain text or files.
+- 🧩 Supports custom keys, shifts, and encryption rules.
+- 🌐 Optional Web Interface using Rust + WebAssembly (Yew).
+- 💡 Built with simplicity in mind — ideal for learning how encryption works under the hood.
 
-Start by clicking "Use this template" at https://github.com/emilk/eframe_template/ or follow [these instructions](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
+## 🚀 Getting Started
 
-Change the name of the crate: Choose a good name for your project, and change the name to it in:
-* `Cargo.toml`
-    * Change the `package.name` from `eframe_template` to `your_crate`.
-    * Change the `package.authors`
-* `main.rs`
-    * Change `eframe_template::TemplateApp` to `your_crate::TemplateApp`
-* `index.html`
-    * Change the `<title>eframe template</title>` to `<title>your_crate</title>`. optional.
-* `assets/sw.js`
-  * Change the `'./eframe_template.js'` to `./your_crate.js` (in `filesToCache` array)
-  * Change the `'./eframe_template_bg.wasm'` to `./your_crate_bg.wasm` (in `filesToCache` array)
+his project use [eframe](https://github.com/emilk/egui/tree/master/crates/eframe), a framework for writing apps using [egui](https://github.com/emilk/egui/).
 
-Alternatively, you can run `fill_template.sh` which will ask for the needed names and email and perform the above patches for you. This is particularly useful if you clone this repository outside GitHub and hence cannot make use of its
-templating function.
+### Clone the repository
 
-### Learning about egui
-
-`src/app.rs` contains a simple example app. This is just to give some inspiration - most of it can be removed if you like.
-
-The official egui docs are at <https://docs.rs/egui>. If you prefer watching a video introduction, check out <https://www.youtube.com/watch?v=NtUkr_z7l84>. For inspiration, check out the [the egui web demo](https://emilk.github.io/egui/index.html) and follow the links in it to its source code.
+```bash
+git clone https://github.com/aelmizeb/rust-crypt.git
+cd rust-crypt
+```
 
 ### Testing locally
 
@@ -75,11 +67,3 @@ We use [Trunk](https://trunkrs.dev/) to build for web target.
 >     branches:
 >       - <branch name>
 > ```
-
-You can test the template app at <https://emilk.github.io/eframe_template/>.
-
-## Updating egui
-
-As of 2023, egui is in active development with frequent releases with breaking changes. [eframe_template](https://github.com/emilk/eframe_template/) will be updated in lock-step to always use the latest version of egui.
-
-When updating `egui` and `eframe` it is recommended you do so one version at the time, and read about the changes in [the egui changelog](https://github.com/emilk/egui/blob/master/CHANGELOG.md) and [eframe changelog](https://github.com/emilk/egui/blob/master/crates/eframe/CHANGELOG.md).

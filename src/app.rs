@@ -4,9 +4,12 @@
 pub struct TemplateApp {
     // Example stuff:
     label: String,
+    #[serde(skip)] value: f32,
 
-    #[serde(skip)] // This how you opt-out of serialization of a field
-    value: f32,
+    // New fields
+    input_text: String,
+    output_text: String,
+    encryption_key: String,
 }
 
 impl Default for TemplateApp {
@@ -15,6 +18,9 @@ impl Default for TemplateApp {
             // Example stuff:
             label: "Hello World!".to_owned(),
             value: 2.7,
+            input_text: "".to_owned(),
+            output_text: "".to_owned(),
+            encryption_key: "defaultkey".to_owned(),
         }
     }
 }
@@ -53,7 +59,19 @@ impl eframe::App for TemplateApp {
                 // NOTE: no File->Quit on web pages!
                 let is_web = cfg!(target_arch = "wasm32");
                 if !is_web {
-                    ui.menu_button("File", |ui| {
+                    ui.menu_button("Menu", |ui| {
+                        if ui.button("Encrypt Text").clicked() {
+                            self.output_text = format!("Encrypted({})", self.input_text); // Dummy logic
+                        }
+
+                        if ui.button("Decrypt Text").clicked() {
+                            self.output_text = format!("Decrypted({})", self.input_text); // Dummy logic
+                        }
+
+                        if ui.button("Settings").clicked() {
+                            // future settings logic
+                        }
+
                         if ui.button("Quit").clicked() {
                             ctx.send_viewport_cmd(egui::ViewportCommand::Close);
                         }
@@ -66,38 +84,48 @@ impl eframe::App for TemplateApp {
         });
 
         egui::CentralPanel::default().show(ctx, |ui| {
-            // The central panel the region left after adding TopPanel's and SidePanel's
-            ui.heading("eframe template");
+            ui.heading("🔐 Rust Crypt");
 
             ui.horizontal(|ui| {
-                ui.label("Write something: ");
-                ui.text_edit_singleline(&mut self.label);
+                ui.label("Encryption Key:");
+                ui.text_edit_singleline(&mut self.encryption_key);
             });
 
-            ui.add(egui::Slider::new(&mut self.value, 0.0..=10.0).text("value"));
-            if ui.button("Increment").clicked() {
-                self.value += 1.0;
-            }
+            ui.label("Input:");
+            ui.text_edit_multiline(&mut self.input_text);
+
+            ui.horizontal(|ui| {
+                if ui.button("🔒 Encrypt").clicked() {
+                    self.output_text = format!("Encrypted({})", self.input_text); // Replace with real encryption logic
+                }
+                if ui.button("🔓 Decrypt").clicked() {
+                    self.output_text = format!("Decrypted({})", self.input_text); // Replace with real decryption logic
+                }
+            });
 
             ui.separator();
-
-            ui.add(egui::github_link_file!(
-                "https://github.com/emilk/eframe_template/blob/main/",
-                "Source code."
-            ));
+            ui.label("Output:");
+            ui.text_edit_multiline(&mut self.output_text);
 
             ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
-                powered_by_egui_and_eframe(ui);
+                powered_by(ui);
                 egui::warn_if_debug_build(ui);
             });
         });
     }
 }
 
-fn powered_by_egui_and_eframe(ui: &mut egui::Ui) {
+use chrono::Datelike;
+
+fn powered_by(ui: &mut egui::Ui) {
+    let current_year = chrono::Utc::now().year();
     ui.horizontal(|ui| {
         ui.spacing_mut().item_spacing.x = 0.0;
-        ui.label("Powered by ");
+        ui.label("Developed by ");
+        ui.hyperlink_to("Abdellatif EL MIZEB", "https://github.com/aelmizeb");
+        ui.label(" ");
+        ui.label(format!("{}", current_year));
+        ui.label(". Powered by ");
         ui.hyperlink_to("egui", "https://github.com/emilk/egui");
         ui.label(" and ");
         ui.hyperlink_to(
