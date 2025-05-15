@@ -1,15 +1,18 @@
 # 🔐 Rust Crypt: A Customizable Encryptor Built with Rust
 
 ![WIP](https://img.shields.io/badge/status-WIP-orange?style=flat-square)
+[![dependency status](https://deps.rs/repo/github/aelmizeb/rust-crypt/status.svg)](https://deps.rs/repo/github/aelmizeb/rust-crypt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > ⚠️ **WORK IN PROGRESS**  
 > This app is currently under active development. It is not ready for use. Please do not install it.
 
-A customizable encryption system built with Rust that allows users to encrypt and decrypt text or files using their own configurable encryption logic. Designed to be educational, flexible, and easy to use.
+A GUI-based encryption app built with Rust to explore and test the Rust GUI ecosystem.
+It allows users to encrypt and decrypt text using configurable logic. Designed to be educational, flexible, and a hands-on testbed for learning GUI development in Rust.
 
 ## 🧠 Features
 
-- ⚙️ Customizable encryption logic (XOR, Caesar, Substitution — or your own).
+- ⚙️ Customizable encryption logic (XOR, Caesar...).
 - 📁 Encrypt plain text or files.
 - 🧩 Supports custom keys, shifts, and encryption rules.
 - 🌐 Optional Web Interface using Rust + WebAssembly (Yew).
