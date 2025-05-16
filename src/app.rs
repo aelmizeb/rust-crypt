@@ -1,7 +1,12 @@
 use eframe::egui;
-use serde::{Deserialize, Serialize};
 
 mod views;
+
+#[derive(serde::Deserialize, serde::Serialize, PartialEq)]
+pub enum EncryptionMethod {
+    Caesar,
+    XOR,
+}
 
 use views::{
     decrypt_file::decrypt_file_view,
@@ -29,6 +34,7 @@ pub struct TemplateApp {
     output_text: String,
     encryption_key: String,
     current_view: CurrentView,
+    selected_encryption: EncryptionMethod,
 }
 
 impl Default for TemplateApp {
@@ -38,6 +44,7 @@ impl Default for TemplateApp {
             output_text: "".to_owned(),
             encryption_key: "defaultkey".to_owned(),
             current_view: CurrentView::EncryptText,
+            selected_encryption: EncryptionMethod::Caesar,
         }
     }
 }

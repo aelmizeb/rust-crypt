@@ -10,6 +10,9 @@
 A GUI-based encryption app built with Rust to explore and test the Rust GUI ecosystem.
 It allows users to encrypt and decrypt text using configurable logic. Designed to be educational, flexible, and a hands-on testbed for learning GUI development in Rust.
 
+## 🔎 Preview
+![Preview Encrypt](./media/preview-encrypt.png) ![Preview Decrypt](./media/preview-decrypt.png)
+
 ## 🧠 Features
 
 - ⚙️ Customizable encryption logic (XOR, Caesar...).
