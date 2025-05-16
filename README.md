@@ -2,6 +2,7 @@
 
 ![WIP](https://img.shields.io/badge/status-WIP-orange?style=flat-square)
 [![dependency status](https://deps.rs/repo/github/aelmizeb/rust-crypt/status.svg)](https://deps.rs/repo/github/aelmizeb/rust-crypt)
+![Total Downloads](https://img.shields.io/github/downloads/aelmizeb/rust-crypt/total)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > ⚠️ **WORK IN PROGRESS**  
