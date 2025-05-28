@@ -1,12 +1,9 @@
 use eframe::egui;
 
 mod views;
+mod encryption;
 
-#[derive(serde::Deserialize, serde::Serialize, PartialEq)]
-pub enum EncryptionMethod {
-    Caesar,
-    XOR,
-}
+use encryption::{EncryptionMethod};
 
 use views::{
     decrypt_file::decrypt_file_view,
@@ -134,8 +131,8 @@ impl eframe::App for TemplateApp {
             match self.current_view {
                 CurrentView::EncryptText => encrypt_text_view(ui, self),
                 CurrentView::DecryptText => decrypt_text_view(ui, self),
-                CurrentView::EncryptFile => encrypt_file_view(ui),
-                CurrentView::DecryptFile => decrypt_file_view(ui),
+                CurrentView::EncryptFile => encrypt_file_view(ui, self),
+                CurrentView::DecryptFile => decrypt_file_view(ui, self),
                 CurrentView::About => about_view(ui),
                 CurrentView::Settings => settings_view(ui),
             }

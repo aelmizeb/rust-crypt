@@ -1,6 +1,6 @@
 [package]
 name = "rust_crypt"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["Abdellatif EL MIZEB <aelmizeb@gmail.com>"]
 edition = "2021"
 include = ["LICENSE", "**/*.rs", "Cargo.toml"]
@@ -25,6 +25,7 @@ log = "0.4.27"
 # You only need serde if you want app persistence:
 serde = { version = "1.0.219", features = ["derive"] }
 chrono = "0.4.41"
+rfd = "0.15.3"
 
 # native:
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]

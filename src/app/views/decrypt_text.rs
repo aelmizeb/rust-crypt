@@ -1,5 +1,6 @@
-use crate::app::{TemplateApp, EncryptionMethod};
+use crate::app::{encryption, TemplateApp};
 use egui::{Ui, ComboBox};
+use encryption::{EncryptionMethod, caesar_decrypt, xor_decrypt};
 
 pub fn decrypt_text_view(ui: &mut Ui, app: &mut TemplateApp) {
     ui.label("🔓 Decrypt Text");
@@ -34,40 +35,4 @@ pub fn decrypt_text_view(ui: &mut Ui, app: &mut TemplateApp) {
 
     ui.label("Output:");
     ui.text_edit_multiline(&mut app.output_text);
-}
-
-// Simple Caesar cipher decryption (reverse of encryption)
-fn caesar_decrypt(text: &str, key: &str) -> String {
-    let shift = key.len() as u8 % 26;
-    text.chars()
-        .map(|c| {
-            if c.is_ascii_lowercase() {
-                (((26 + c as u8 - b'a' - shift) % 26) + b'a') as char
-            } else if c.is_ascii_uppercase() {
-                (((26 + c as u8 - b'A' - shift) % 26) + b'A') as char
-            } else {
-                c
-            }
-        })
-        .collect()
-}
-
-// XOR cipher decryption from hex input
-fn xor_decrypt(hex: &str, key: &str) -> String {
-    if key.is_empty() {
-        return "Error: key is empty".to_owned();
-    }
-
-    let key_bytes = key.as_bytes();
-    let bytes = (0..hex.len())
-        .step_by(2)
-        .filter_map(|i| u8::from_str_radix(&hex[i..i + 2], 16).ok())
-        .collect::<Vec<u8>>();
-
-    bytes
-        .iter()
-        .enumerate()
-        .map(|(i, &b)| b ^ key_bytes[i % key_bytes.len()])
-        .map(|b| b as char)
-        .collect()
 }
