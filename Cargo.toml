@@ -1,6 +1,6 @@
 [package]
 name = "rust_crypt"
-version = "1.0.0"
+version = "1.1.0"
 authors = ["Abdellatif EL MIZEB <aelmizeb@gmail.com>"]
 edition = "2021"
 include = ["LICENSE", "**/*.rs", "Cargo.toml"]
