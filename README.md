@@ -1,12 +1,17 @@
 # 🔐 Rust Crypt: A Customizable Encryptor Built with Rust
 
+<!--
 ![WIP](https://img.shields.io/badge/status-WIP-orange?style=flat-square)
+-->
+![Status: Stable](https://img.shields.io/badge/status-stable-brightgreen?style=flat-square)
 [![dependency status](https://deps.rs/repo/github/aelmizeb/rust-crypt/status.svg)](https://deps.rs/repo/github/aelmizeb/rust-crypt)
 ![Total Downloads](https://img.shields.io/github/downloads/aelmizeb/rust-crypt/total)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+<!--
 > ⚠️ **WORK IN PROGRESS**  
 > This app is currently under active development. It is not ready for use. Please do not install it.
+-->
 
 A GUI-based encryption app built with Rust to explore and test the Rust GUI ecosystem.
 It allows users to encrypt and decrypt text using configurable logic. Designed to be educational, flexible, and a hands-on testbed for learning GUI development in Rust.
