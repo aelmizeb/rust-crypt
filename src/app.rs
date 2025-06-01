@@ -32,6 +32,7 @@ pub struct TemplateApp {
     encryption_key: String,
     current_view: CurrentView,
     selected_encryption: EncryptionMethod,
+    custom_script: String,
 }
 
 impl Default for TemplateApp {
@@ -42,6 +43,7 @@ impl Default for TemplateApp {
             encryption_key: "defaultkey".to_owned(),
             current_view: CurrentView::EncryptText,
             selected_encryption: EncryptionMethod::Caesar,
+            custom_script: String::new(),
         }
     }
 }

@@ -2,7 +2,7 @@ use crate::app::{encryption, TemplateApp};
 use egui::{Ui, ComboBox, RichText, TextEdit};
 use rfd::FileDialog;
 use std::fs;
-use encryption::{EncryptionMethod, caesar_encrypt_file, xor_encrypt_file};
+use encryption::{EncryptionMethod, caesar_encrypt_file, xor_encrypt_file, custom_encrypt_file};
 
 pub fn encrypt_file_view(ui: &mut Ui, app: &mut TemplateApp) {
     ui.heading(RichText::new("📁 Encrypt File").size(20.0).strong());
@@ -27,13 +27,27 @@ pub fn encrypt_file_view(ui: &mut Ui, app: &mut TemplateApp) {
                 .selected_text(match app.selected_encryption {
                     EncryptionMethod::Caesar => "Caesar Cipher",
                     EncryptionMethod::XOR => "XOR Cipher",
+                    EncryptionMethod::Custom => "Custom Script",
                 })
                 .show_ui(ui, |ui| {
                     ui.selectable_value(&mut app.selected_encryption, EncryptionMethod::Caesar, "Caesar Cipher");
                     ui.selectable_value(&mut app.selected_encryption, EncryptionMethod::XOR, "XOR Cipher");
+                    ui.selectable_value(&mut app.selected_encryption, EncryptionMethod::Custom, "Custom Script");
                 });
 
             ui.add_space(10.0);
+
+            // Custom Script Input (if Custom is selected)
+            if app.selected_encryption == EncryptionMethod::Custom {
+                ui.label(RichText::new("📜 Custom Rhai Script").strong());
+                ui.add(
+                    TextEdit::multiline(&mut app.custom_script)
+                        .hint_text("Example: text + \" 🔐\" + key")
+                        .desired_rows(6)
+                        .desired_width(ui.available_width()),
+                );
+                ui.add_space(10.0);
+            }
 
             // File Selection Button
             if ui.button("📂 Select File to Encrypt").clicked() {
@@ -42,6 +56,9 @@ pub fn encrypt_file_view(ui: &mut Ui, app: &mut TemplateApp) {
                         let encrypted = match app.selected_encryption {
                             EncryptionMethod::Caesar => caesar_encrypt_file(&data, &app.encryption_key),
                             EncryptionMethod::XOR => xor_encrypt_file(&data, &app.encryption_key),
+                            EncryptionMethod::Custom => {
+                                custom_encrypt_file(&data, &app.encryption_key, &app.custom_script)
+                            }
                         };
 
                         let output_path = path.with_file_name(format!(

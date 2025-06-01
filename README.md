@@ -23,6 +23,37 @@ It allows users to encrypt and decrypt text using configurable logic. Designed t
 - 🌐 Optional Web Interface using Rust + WebAssembly (Yew).
 - 💡 Built with simplicity in mind — ideal for learning how encryption works under the hood.
 
+## 🆕 New Feature: Custom Script Encryption/Decryption
+You can write your own encryption and decryption logic using Rhai, an embedded scripting language for Rust.
+This allows you to define your own custom algorithms directly in the app, by entering a Rhai script for encryption and another for decryption.
+
+Example: Simple String Reversal Script (Encrypt & Decrypt)
+
+```bash
+let result = "";
+let len = text.len();
+while len > 0 {
+    len -= 1;
+    result += text[len..len+1];
+}
+result
+```
+
+This script reverses the input string text by iterating backward over its characters and concatenating them.
+Use the same script for encryption and decryption, as reversing twice returns the original text.
+
+### How to Use:
+
+1- Select Custom Script as the encryption method.
+
+2- Enter your encryption script (e.g., the reversal script above).
+
+3- Enter the same script for decryption.
+
+4- Enter your key if needed (can be ignored for simple scripts).
+
+5- Encrypt and decrypt text or files using your custom logic.
+
 ## 🚀 Getting Started
 
 his project use [eframe](https://github.com/emilk/egui/tree/master/crates/eframe), a framework for writing apps using [egui](https://github.com/emilk/egui/).

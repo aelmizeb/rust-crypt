@@ -10,7 +10,7 @@ fn main() -> eframe::Result {
         viewport: egui::ViewportBuilder::default()
             .with_title("Rust Crypt")
             .with_decorations(true)
-            .with_inner_size([700.0, 500.0])
+            .with_inner_size([900.0, 500.0])
             .with_min_inner_size([500.0, 220.0])
             .with_icon(
                 // NOTE: Adding an icon is optional

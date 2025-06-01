@@ -1,6 +1,6 @@
 use crate::app::{encryption, TemplateApp};
 use egui::{Ui, ComboBox, RichText, TextEdit};
-use encryption::{EncryptionMethod, caesar_encrypt, xor_encrypt};
+use encryption::{EncryptionMethod, caesar_encrypt, xor_encrypt, custom_encrypt};
 
 pub fn encrypt_text_view(ui: &mut Ui, app: &mut TemplateApp) {
     ui.heading(RichText::new("🔒 Encrypt Text").size(20.0).strong());
@@ -25,10 +25,12 @@ pub fn encrypt_text_view(ui: &mut Ui, app: &mut TemplateApp) {
                 .selected_text(match app.selected_encryption {
                     EncryptionMethod::Caesar => "Caesar Cipher",
                     EncryptionMethod::XOR => "XOR Cipher",
+                    EncryptionMethod::Custom => "Custom (Rhai Script)",
                 })
                 .show_ui(ui, |ui| {
                     ui.selectable_value(&mut app.selected_encryption, EncryptionMethod::Caesar, "Caesar Cipher");
                     ui.selectable_value(&mut app.selected_encryption, EncryptionMethod::XOR, "XOR Cipher");
+                    ui.selectable_value(&mut app.selected_encryption, EncryptionMethod::Custom, "Custom (Rhai Script)");
                 });
 
             ui.add_space(10.0);
@@ -43,11 +45,27 @@ pub fn encrypt_text_view(ui: &mut Ui, app: &mut TemplateApp) {
 
             ui.add_space(10.0);
 
+            // Custom Script Editor
+            if app.selected_encryption == EncryptionMethod::Custom {
+                ui.label("📜 Custom Rhai Script:");
+                ui.add(
+                    TextEdit::multiline(&mut app.custom_script)
+                        .desired_rows(10)
+                        .hint_text("fn encrypt(text, key) { ... }")
+                        .desired_width(ui.available_width())
+                );
+            }
+
+            ui.add_space(10.0);
+
             // Encrypt Button
             if ui.button("🔒 Encrypt").clicked() {
                 app.output_text = match app.selected_encryption {
                     EncryptionMethod::Caesar => caesar_encrypt(&app.input_text, &app.encryption_key),
                     EncryptionMethod::XOR => xor_encrypt(&app.input_text, &app.encryption_key),
+                    EncryptionMethod::Custom => {
+                        custom_encrypt(&app.custom_script, &app.input_text, &app.encryption_key)
+                    }
                 };
             }
 
